@@ -1,0 +1,10 @@
+Package: mevd
+Version: 0.1-0
+Date: 2019-10-31
+Title: Functions for the Metastatistical Extreme Value Distribution MEVD 
+Authors@R: c(person("Harald", "Schellander", role = c("aut", "cre"), email = "harald.schellander@zamg.ac.at"),
+			 person("Alexander", "Lieb", role = c("ctb")))
+Maintainer: Harald Schellander <harald.schellander@zamg.ac.at>
+Depends: R (>= 3.4.0), WeibullR, EnvStats
+Description: This package provides functions for the metastatistical extreme value distribution MEVD.
+License: GPL-2 | GPL-3
