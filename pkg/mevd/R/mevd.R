@@ -282,12 +282,12 @@ pp.weibull <- function(maxima){
 }
 
 
-# S3 methods print
+# S3 method print
 print.mevd <- function(x, digits = max(3, getOption("digits") - 3), ...){
   cat("MEVD fitting\n\n")
   cat(paste0("type: ",x$type,"\n"))
   cat(paste0("Estimator: ",x$method,"\n"))
-  
+
   cat("\nParameters:")
   cat("\nShape w:\n")
   shape <- x$w
@@ -298,9 +298,11 @@ print.mevd <- function(x, digits = max(3, getOption("digits") - 3), ...){
   cat("\nWet days n:\n")
   n <- x$n
   print.default(format(n, digits = digits), print.gap = 2, quote = FALSE)
- 
-  invisible(x) 
+
+  invisible(x)
 }
+
+
 
 # S3 method plot
 plot.mevd <- function(x, q = c(2,5,10,20,50,100,200), ci = FALSE, type=c("all","rl","qq"), ...){

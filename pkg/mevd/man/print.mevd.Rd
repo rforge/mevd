@@ -1,6 +1,6 @@
 \name{print.mevd}
 \alias{print.mevd}
-\title{Print output of a mevd object.}
+\title{Print output of an mevd object.}
 \usage{
      \method{print}{mevd}(x, digits = max(3, getOption("digits") - 3), ...)
 }

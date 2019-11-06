@@ -1,4 +1,4 @@
-import("WeibullR","EnvStats")
+import("stats","graphics","WeibullR","EnvStats")
 export(
   "qmev",
   "rmev",
@@ -8,12 +8,10 @@ export(
   "fmev",
   "fit_mev"
 )
-importFrom("stats", "na.omit", "runif", "uniroot", "quantile", "rweibull")
-importFrom("graphics", "plot", "abline", "lines", "par", "points", "title")
-## methods 
-S3method("print", "mevd")
-S3method("plot", "mevd")
 
+## methods 
+S3method("plot", "mevd")
+S3method("print", "mevd")
 
 
 

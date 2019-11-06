@@ -10,7 +10,7 @@
      \item{q}{vector of return periods, \eqn{q > 1}.}
      \item{ci}{if \code{ci = TRUE}, confidence intervals will be computed.}
      \item{type}{if omitted a return level plot \code{type = 'rl'} and a qq-plot \code{type = 'qq'} are shown. }
-     \item{...}{Further parameters may also be supplied as arguments. See \code{\link[graphics]{plot}} and \code{\link[distillery]{ci}}. }
+     \item{...}{Further parameters may also be supplied as arguments. See e.g. \code{\link[graphics]{plot}}. }
 }
 \description{
      Plot return levels of an mevd object.
