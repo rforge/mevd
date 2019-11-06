@@ -7,13 +7,13 @@ export(
   "rlmev",
   "fmev",
   "fit_mev",
-  "print.mevd"
+  "print.mevd" 
 )
 importFrom("EnvStats","eweibull")
-## methods 
-S3method("plot", "mevd")
-S3method("print", "mevd")
 
+## methods 
+S3method("print", "mevd")
+S3method("plot", "mevd")
 
 
 
