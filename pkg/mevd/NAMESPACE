@@ -14,7 +14,7 @@ importFrom("EnvStats","eweibull")
 ## methods 
 S3method("print", "mevd")
 S3method("plot", "mevd")
-
+ 
 
 
 

@@ -9,3 +9,7 @@ Depends: R (>= 3.4.0), EnvStats
 Imports: stats, graphics
 Description: Functions for fitting the metastatistical extreme value distribution MEVD to rainfall data are provided.
 License: GPL-2 | GPL-3
+
+
+
+ 

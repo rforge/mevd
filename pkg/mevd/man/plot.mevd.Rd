@@ -15,7 +15,7 @@
 \description{
      Plot return levels of an mevd object.
 }
-
+ 
 \examples{
 w <- 0.7
 c <- 48

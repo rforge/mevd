@@ -302,7 +302,7 @@ print.mevd <- function(x, digits = max(3, getOption("digits") - 3), ...){
   invisible(x)
 }
 
-
+ 
 
 # S3 method plot
 plot.mevd <- function(x, q = c(2,5,10,20,50,100,200), ci = FALSE, type=c("all","rl","qq"), ...){
