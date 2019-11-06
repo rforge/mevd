@@ -18,11 +18,15 @@ fmev <- function(data, n = NULL, threshold = 0, type = c("simple","annual"),
   method <- match.arg(method)
   
   if(is.vector(data) && (type=="annual")) {
-    stop("If 'data' is a vector you have to choose type 'simple'")}
+    stop("If 'data' is a vector type must be 'simple'")}
   
   # compute n from data
   if(is.null(n)){
-    n <- mean(c(data[data>=threshold]),na.rm = TRUE)
+    if(type == 'simple'){
+      n <- mean(c(data[data>=threshold]),na.rm = TRUE)
+    } else {
+      n <- apply(data,2,mean,na.rm=TRUE)
+    }
   } 
     
   
@@ -47,12 +51,12 @@ fmev <- function(data, n = NULL, threshold = 0, type = c("simple","annual"),
                fit <- fit_mev(values,method)
                annual$w[i] <- fit$w
                annual$c[i] <- fit$c
-               annual$n[i] <- n
+               #annual$n[i] <- n
              },error = function(e){cat("ERROR at year", paste(colnames(data)[i]),conditionMessage(e), "\n")})
            }
            w <- annual$w
            c <- annual$c
-           n <- annual$n
+           #n <- annual$n
          },
          
          simple = {
