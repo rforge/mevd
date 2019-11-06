@@ -1,5 +1,5 @@
 #------------------------------------------------------------------------------------------#
-#  fit MEV based on Weibull variables
+#  fit MEV based on Weibull variables 
 #------------------------------------------------------------------------------------------#
 fmev <- function(data, n = NULL, threshold = 0, type = c("simple","annual"), 
                  method=c("pwm","mle")){

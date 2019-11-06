@@ -1,4 +1,4 @@
-import("stats","graphics","WeibullR")
+import("stats","graphics")
 export(
   "qmev",
   "rmev",
@@ -6,7 +6,8 @@ export(
   "pmev",
   "rlmev",
   "fmev",
-  "fit_mev"
+  "fit_mev",
+  "print.mevd"
 )
 importFrom("EnvStats","eweibull")
 ## methods 
