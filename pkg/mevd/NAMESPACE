@@ -1,4 +1,4 @@
-import("stats","graphics","WeibullR","EnvStats")
+import("stats","graphics","WeibullR")
 export(
   "qmev",
   "rmev",
@@ -8,7 +8,7 @@ export(
   "fmev",
   "fit_mev"
 )
-
+importFrom("EnvStats","eweibull")
 ## methods 
 S3method("plot", "mevd")
 S3method("print", "mevd")
