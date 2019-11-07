@@ -3,7 +3,7 @@
 \alias{fmev}
 \alias{fit_mev}
 \alias{rlmev}
-  
+   
 
 \title{Fitting the Metastatistical Extreme Value Distribution (MEV) to rainfall data}
 

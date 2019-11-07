@@ -4,7 +4,7 @@
 \alias{qmev}
 \alias{dmev}
 
-  
+   
 
 \title{The Metastatistical Extreme Value Distribution (MEVD)}
 
