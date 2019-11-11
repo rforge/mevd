@@ -29,7 +29,7 @@ fmev <- function(data, n = NULL, threshold = 0, type = c("simple","annual"),
     }
   } 
        
-  
+ 
   # remove data smaller than threshold
   if(is.vector(data)){
     data <- data[data>=threshold]
