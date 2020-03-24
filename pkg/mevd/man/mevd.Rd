@@ -11,7 +11,7 @@
   Fit a MEV distribution to rainfall observations using maximum likelihood or probability weighted moments.
 }
 \usage{
-fmev(data, n = NULL, threshold = 0, type =c("simple","annual"), 
+fmev(data, n, threshold = 0, type =c("simple","annual"), 
      method=c("pwm","mle"))
 
 fit_mev(data,method)
@@ -22,7 +22,7 @@ rlmev(q, w, c, n)
 
 \arguments{
      \item{data}{ data must be either numeric or matrix with years as columns and all values per year as rows (see details).}
-     \item{n}{ mean number of wet days, i.e. precipitation values >= \code{threshold} . If \code{n = NULL}, \code{n} is computed from \code{data >= threshold} (see details).}
+     \item{n}{ mean number of wet days, i.e. precipitation values >= \code{threshold} per year (see details). Must be a vector for \code{type='annual'} or a single number for \code{type='simple'}. }
      \item{threshold}{ \eqn{data < threshold} is set to NA.}
      \item{type}{ \code{type='simple'} computes one single value for parameters C and w, whereas \code{type='annual'} calculates one C and w for each year in \code{data}. \code{type='annual'} can therefore only be used, when \code{data} is a matrix. In both cases, if not given explicitly, n will be computed as the mean number of wet days (i.e. days with precipitation >= \code{threshold}) from \code{data}. The \code{default} is \code{simple} (see details).}
      \item{method}{ MEV parameters C and w can be computed using probability weighted moments \code{method = 'pwm'} or maximum likelihood \code{method = 'mle'}. The \code{default} is \code{pwm}. (see details).}
@@ -78,12 +78,23 @@ As is shown e.g. Schellander et al., 2019, probability weighted moments should b
 w <- 0.87
 c <- 75
 data <- matrix(NA,365,50)
+
+# 50 years of raifall data
 for(y in 1:50){
      data[,y] <- rweibull(365,shape=w,scale=c)
 }
 
-fit <- fmev(data)
+# mean number of wet days per year
+threshold <- 20
+n <- apply(data,2,function(x){
+  length(which(x>threshold))
+})
+
+fit <- fmev(data,n=n,type="annual")
 fit
-plot(fit, ci = TRUE, R = 150)
-rlmev(2:50, fit$w, fit$c, fit$n)
+plot(fit)
+
+fit1 <- fmev(c(data),mean(n),type="simple")
+plot(fit1, ci = TRUE, R = 150)
+rlmev(2:50, fit1$w, fit1$c, fit1$n)
 }

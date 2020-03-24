@@ -8,7 +8,7 @@
 
 \title{The Metastatistical Extreme Value Distribution (MEVD)}
 
-\description{Density, distribution function, quantile function and random generation for the MEV distribution with shape parameter 'w', scale parameter 'c' and mean number of wet days 'n'.}
+\description{Density, distribution function, quantile function and random generation for the MEV distribution with shape parameter 'w', scale parameter 'c' and mean number of wet days per year 'n'.}
 
 \usage{
 rmev(N, w, c, n)
@@ -22,7 +22,7 @@ dmev(x, w, c, n)
  \item{p}{vector or single value of probabilities for \code{qmev}.}
  \item{N}{Number of observations.}
  \item{w,c}{vector or single values of shape and scale parameter of the MEV distribution.}
- \item{n}{Mean number of wet days. Can be a vector for yearly MEV calculations (i.e. one value per year), or a single value for the simplified MEV (see details).}
+ \item{n}{Mean number of wet days per year. Can be a vector for yearly MEV calculations (i.e. one value per year), or a single value for the simplified MEV (see details).}
 }
 
 \details{

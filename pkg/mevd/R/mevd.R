@@ -1,12 +1,18 @@
 #------------------------------------------------------------------------------------------#
 #  fit MEV based on Weibull variables 
 #------------------------------------------------------------------------------------------#
-fmev <- function(data, n = NULL, threshold = 0, type = c("simple","annual"), 
+fmev <- function(data, n, threshold = 0, type = c("simple","annual"), 
                  method=c("pwm","mle")){
   #Input:
   # data must be either a vector or a matrix of precipitation values
-  if(!(is.matrix(data) | is.numeric(data)))
-    stop("fmev: data must be either numeric or matrix with years as columns and all values per year as rows.")
+  if(!(is.matrix(data) | (is.vector(data) & length(data) > 1)))
+    stop("fmev: data must be either vector or matrix with years as columns and all values per year as rows.")
+  
+  if(is.matrix(data) & !(is.vector(n) & length(n) > 1))
+    stop("fmev: n must be a vector with one value per year")
+    
+  if(is.vector(data) & length(data) > 1 & length(n) > 1)
+    stop("fmev: n must be a single number when type is 'simple'")
   
   # if(!(type == "simple" | type == "annual"))
   #   stop("fmev: type must be one of 'simple' or 'annual'.")
@@ -17,21 +23,18 @@ fmev <- function(data, n = NULL, threshold = 0, type = c("simple","annual"),
   type <- match.arg(type)
   method <- match.arg(method)
   
-  if(is.vector(data) && (type=="annual")) {
-    stop("If 'data' is a vector type must be 'simple'")}
+  if(is.vector(data) & length(data) > 1 & type=="annual") {
+    stop("If 'data' is a vector type must be 'simple'")
+  }
   
-  # compute n from data
-  if(is.null(n)){
-    if(type == 'simple'){
-      n <- mean(c(data[data>threshold]),na.rm = TRUE)
-    } else {
-      n <- apply(data,2,mean,na.rm=TRUE)
-    }
-  } 
-       
- 
+  if(type=="simple" & length(n)>1){
+    warning("n is a vector with yearly values, but should be a single number when type='simple'. Taking the mean of n.")
+    n <- mean(n,na.rm=TRUE)
+  }
+    
+  
   # remove data smaller than threshold
-  if(is.vector(data)){
+  if(is.vector(data) & length(data) > 1){
     data <- data[data>=threshold]
   } else{
     data[data<threshold] <- NA
@@ -67,7 +70,7 @@ fmev <- function(data, n = NULL, threshold = 0, type = c("simple","annual"),
          }
   )
   
-  if(is.vector(data)){
+  if(is.vector(data) & length(data) > 1){
       maxima <- c()
   } else{
     maxima <- apply(data,2,function(x) max(x, na.rm = TRUE)) 
@@ -226,6 +229,9 @@ ci.mev <- function(x, alpha = 0.05, return.periods = c(2,10,20,30,50,75,100,150,
   if(!inherits(x, "mevd"))
     stop("conf.int: x must be object of class 'mevd'")
   
+  if(x$type=="annual")
+    stop("conf.int: ci's will not be computed for type='annual ")
+  
   w <- x$w #shape
   c <- x$c #scale
   n <- x$n # number of wet days
@@ -313,7 +319,7 @@ plot.mevd <- function(x, q = c(2,5,10,20,50,100,200), ci = FALSE, type=c("all","
   
   type <- match.arg(type)
   
-  if(type=="all" & !is.vector(x$data)){
+  if(type=="all" & !(is.vector(x$data) & length(x$data)>1)){
     par(mfrow = c(1, 2), oma = c(0, 0, 2, 0))
   }
   

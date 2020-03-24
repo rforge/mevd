@@ -24,7 +24,13 @@ for(y in 1:50){
      data[,y] <- rweibull(365,shape=w,scale=c)
 }
 
-fit <- fmev(data)
+# mean number of wet days per year
+threshold <- 20
+n <- apply(data,2,function(x){
+  length(which(x>threshold))
+})
+
+fit <- fmev(data,n)
 plot(fit)
 
 }
