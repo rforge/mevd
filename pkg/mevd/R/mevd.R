@@ -35,9 +35,9 @@ fmev <- function(data, n, threshold = 0, type = c("simple","annual"),
   
   # remove data smaller than threshold
   if(is.vector(data) & length(data) > 1){
-    data <- data[data>=threshold]
+    data <- data[data>threshold]
   } else{
-    data[data<threshold] <- NA
+    data[data<=threshold] <- NA
   }
   
   switch(type,

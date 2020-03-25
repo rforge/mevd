@@ -22,7 +22,7 @@ rlmev(q, w, c, n)
 
 \arguments{
      \item{data}{ data must be either numeric or matrix with years as columns and all values per year as rows (see details).}
-     \item{n}{ mean number of wet days, i.e. precipitation values >= \code{threshold} per year (see details). Must be a vector for \code{type='annual'} or a single number for \code{type='simple'}. }
+     \item{n}{ mean number of wet events, i.e. precipitation values >= \code{threshold} per year (see details). Must be a vector for \code{type='annual'} or a single number for \code{type='simple'}. }
      \item{threshold}{ \eqn{data < threshold} is set to NA.}
      \item{type}{ \code{type='simple'} computes one single value for parameters C and w, whereas \code{type='annual'} calculates one C and w for each year in \code{data}. \code{type='annual'} can therefore only be used, when \code{data} is a matrix. In both cases, if not given explicitly, n will be computed as the mean number of wet days (i.e. days with precipitation >= \code{threshold}) from \code{data}. The \code{default} is \code{simple} (see details).}
      \item{method}{ MEV parameters C and w can be computed using probability weighted moments \code{method = 'pwm'} or maximum likelihood \code{method = 'mle'}. The \code{default} is \code{pwm}. (see details).}
@@ -45,6 +45,7 @@ with single values for the shape and scale parameters w and C. n is then the mea
 
 As is shown e.g. Schellander et al., 2019, probability weighted moments should be preferred over maximum likelihood for the estimation of the Weibull parameters w and C. Therefore \code{method = 'pwm'} is the default.
 
+The MEVD can also be used for sub-daily precipitation (Marra et al., 2019). I nthat case n has to be adapted accordingly to the 'mean number of wet events' per year.
 
 }
 
@@ -52,14 +53,11 @@ As is shown e.g. Schellander et al., 2019, probability weighted moments should b
   An list of class \code{mevd} with components:
   \item{w}{ Shape parameter w of the MEVD, estimated with \code{method}. Single value if \code{type = 'simple'}, vector if \code{type = 'annual'}.}
   \item{C}{ Scale parameter C of the MEVD, estimated with \code{method}. Single value if \code{type = 'simple'}, vector if \code{type = 'annual'}.}
-  \item{n}{ Number of wet days. Single value if \code{type = 'simple'}, vector if \code{type = 'annual'}.}
+  \item{n}{ Number of wet events. Single value if \code{type = 'simple'}, vector if \code{type = 'annual'}.}
   \item{data}{ \eqn{data >= threshold} used to fit the MEVD.}
   \item{maxima}{ Yearly maxima estimated from data matrix.}
   \item{threshold}{ Threshold used to select data.}
   \item{method}{ Method used to fit the MEVD.}
-  
-  
-  
   
 }
 
@@ -79,7 +77,8 @@ w <- 0.87
 c <- 75
 data <- matrix(NA,365,50)
 
-# 50 years of raifall data
+# 50 years of daily rainfall data
+# each year has 365 values
 for(y in 1:50){
      data[,y] <- rweibull(365,shape=w,scale=c)
 }

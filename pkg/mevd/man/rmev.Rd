@@ -22,7 +22,7 @@ dmev(x, w, c, n)
  \item{p}{vector or single value of probabilities for \code{qmev}.}
  \item{N}{Number of observations.}
  \item{w,c}{vector or single values of shape and scale parameter of the MEV distribution.}
- \item{n}{Mean number of wet days per year. Can be a vector for yearly MEV calculations (i.e. one value per year), or a single value for the simplified MEV (see details).}
+ \item{n}{Mean number of wet events per year. Can be a vector for yearly MEV calculations (i.e. one value per year), or a single value for the simplified MEV (see details).}
 }
 
 \details{
